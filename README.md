@@ -15,8 +15,14 @@ import { ModelViewerView } from "react-native-model-viewer";
 
 // ...
 
-<ModelViewerView color="tomato" />
-```
+ <ModelViewerView
+        url="https://res.cloudinary.com/demo/image/upload/DamagedHelmet3D.glb"
+        color="#AB47BC"
+        loadingColor="#1B5E20"
+        style={styles.box}
+      />
+
+      ```
 
 ## Contributing
 

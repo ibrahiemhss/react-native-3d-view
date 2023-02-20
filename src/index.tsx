@@ -13,6 +13,8 @@ const LINKING_ERROR =
 
 type ModelViewerProps = {
   color: string;
+  url: string;
+  loadingColor: string;
   style: ViewStyle;
 };
 

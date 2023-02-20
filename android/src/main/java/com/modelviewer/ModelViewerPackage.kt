@@ -12,6 +12,6 @@ class ModelViewerPackage : ReactPackage {
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    return listOf(ModelViewerViewManager())
+    return listOf(ModelViewerViewManager(reactContext))
   }
 }

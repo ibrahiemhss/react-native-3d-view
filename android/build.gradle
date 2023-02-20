@@ -4,6 +4,7 @@ buildscript {
 
   repositories {
     google()
+    jcenter()
     mavenCentral()
   }
 
@@ -71,6 +72,10 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'com.google.android.filament:filament-android:1.20.0'
+  implementation 'com.google.android.filament:filament-utils-android:1.20.0'
+  implementation 'com.google.android.filament:gltfio-android:1.20.0'
+  implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.4'
 }
 
 if (isNewArchitectureEnabled()) {
