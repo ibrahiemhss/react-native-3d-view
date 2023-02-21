@@ -57,6 +57,9 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
+  aaptOptions {
+    noCompress 'filamat', 'ktx'
+  }
 }
 
 repositories {
@@ -72,10 +75,12 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.android.filament:filament-android:1.20.0'
-  implementation 'com.google.android.filament:filament-utils-android:1.20.0'
-  implementation 'com.google.android.filament:gltfio-android:1.20.0'
+  implementation 'com.google.android.filament:filament-android:1.21.1'
+  implementation 'com.google.android.filament:filament-utils-android:1.21.1'
+  implementation 'com.google.android.filament:gltfio-android:1.21.1'
   implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.4'
+  implementation "com.gorisse.thomas.sceneform:sceneform:1.21.0"
+
 }
 
 if (isNewArchitectureEnabled()) {

@@ -7,8 +7,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ModelViewerView
-        url="https://res.cloudinary.com/demo/image/upload/DamagedHelmet3D.glb"
-        color="#AB47BC"
+        url="http://176.126.237.165/beem/ship_no_materials.glb"
+        color="#78909C"
         loadingColor="#1B5E20"
         style={styles.box}
       />
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   box: {
     width: '100%',
-    height: '100%',
-    marginVertical: 20,
+    height: '50%',
   },
 });

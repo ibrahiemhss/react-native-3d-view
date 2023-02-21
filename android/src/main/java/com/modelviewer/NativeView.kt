@@ -1,6 +1,6 @@
 package com.modelviewer
 
-import android .annotation.SuppressLint
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -15,6 +15,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import com.facebook.react.bridge.*
+import com.google.ar.sceneform.SceneView
+import java.nio.ByteBuffer
 import java.util.*
 
 
@@ -23,26 +25,25 @@ class NativeView(
   context: Context,
   reactApplicationContext: ReactApplicationContext) :
   RelativeLayout(context),LifecycleOwner,Loading {
-  var surfaceView: SurfaceView? = null
-  var customViewer: CustomViewer = CustomViewer()
 
   private lateinit var lifecycleRegistry: LifecycleRegistry
   private val TAG = "NativeGlbView"
   var mainView: View? = null
-
+  var surfaceView: SurfaceView? = null
+  var customViewer: CustomViewer = CustomViewer()
   private var mReconnectingProgressBar: ProgressBar? = null
   private var mReactApplicationContext: ReactApplicationContext? = null
-
 
   init {
     customViewer.loadingDelegate = this;
     mReactApplicationContext = reactApplicationContext
     val inflater = LayoutInflater.from(context)
     mainView = inflater.inflate(R.layout.native_view, this)
-    surfaceView =
-      mainView!!.findViewById<View>(R.id.surface_view) as SurfaceView?
+
     mReconnectingProgressBar=
       mainView!!.findViewById<View>(R.id.progress_par) as ProgressBar?
+    surfaceView=
+      mainView!!.findViewById<View>(R.id.surface_view) as SurfaceView?
 
     surfaceView!!.setZOrderOnTop(true)
     surfaceView!!.setBackgroundColor(Color.TRANSPARENT)
@@ -53,15 +54,19 @@ class NativeView(
   fun setModelViewerColor(color: Int){
     customViewer.setModelViewerColor(color);
   }
-fun startView(url:String){
+fun loadGlbUrl(url:String){
   customViewer.run {
     loadEntity()
-    setSurfaceView(requireNotNull(surfaceView))
+    setSurfaceView(requireNotNull(surfaceView),context)
     loadGlb(url)
-
   }
 }
-
+  private fun readAsset(context: Context, assetName: String): ByteBuffer {
+    val input = context.assets.open(assetName)
+    val bytes = ByteArray(input.available())
+    input.read(bytes)
+    return ByteBuffer.wrap(bytes)
+  }
   fun setProgressColor(color:String){
     mReconnectingProgressBar?.setProgressTintList(ColorStateList.valueOf(Color.parseColor(color)));
   }
