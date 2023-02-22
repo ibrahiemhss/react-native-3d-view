@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.os.Handler
+import android.os.Looper
 import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,14 +47,15 @@ class NativeView(
     surfaceView=
       mainView!!.findViewById<View>(R.id.surface_view) as SurfaceView?
 
-    surfaceView!!.setZOrderOnTop(true)
+    //surfaceView!!.setZOrderOnTop(true)
     surfaceView!!.setBackgroundColor(Color.TRANSPARENT)
     surfaceView!!.getHolder().setFormat(PixelFormat.TRANSLUCENT)
 
   }
 
   fun setModelViewerColor(color: Int){
-    customViewer.setModelViewerColor(color);
+    surfaceView!!.setBackgroundColor(color)
+    customViewer.setModelViewerColor(color)
   }
 fun loadGlbUrl(url:String){
   customViewer.run {
@@ -71,8 +74,16 @@ fun loadGlbUrl(url:String){
     mReconnectingProgressBar?.setProgressTintList(ColorStateList.valueOf(Color.parseColor(color)));
   }
   override fun onFinish() {
-    mReconnectingProgressBar?.visibility =INVISIBLE
     surfaceView?.visibility =VISIBLE
+    Handler(Looper.getMainLooper()).postDelayed(
+      {
+       // surfaceView!!.setZOrderOnTop(true)
+        surfaceView!!.setBackgroundColor(Color.TRANSPARENT)
+        surfaceView!!.getHolder().setFormat(PixelFormat.TRANSLUCENT)
+        mReconnectingProgressBar?.visibility =INVISIBLE
+      },
+      1000 // value in milliseconds
+    )
   }
 
   // life cycle ------------------------------------

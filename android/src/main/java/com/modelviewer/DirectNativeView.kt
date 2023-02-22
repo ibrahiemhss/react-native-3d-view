@@ -406,7 +406,7 @@ class DirectNativeView(
   inner class DoubleTapListener : GestureDetector.SimpleOnGestureListener() {
     override fun onDoubleTap(e: MotionEvent): Boolean {
       modelViewer.destroyModel()
-      createDefaultRenderables()
+     // createDefaultRenderables()
       return super.onDoubleTap(e)
     }
   }

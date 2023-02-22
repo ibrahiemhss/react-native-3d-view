@@ -3,24 +3,19 @@ package com.modelviewer
 import android.animation.ValueAnimator
 import android.content.Context
 import android.opengl.Matrix
-import android.os.AsyncTask
 import android.util.Log
 import android.view.Choreographer
 import android.view.SurfaceView
 import android.view.animation.LinearInterpolator
 import com.google.android.filament.*
-import com.google.android.filament.utils.*
-import java.io.BufferedInputStream
-import java.io.ByteArrayOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import com.google.android.filament.utils.KTXLoader
+import com.google.android.filament.utils.ModelViewer
+import com.google.android.filament.utils.Utils
+import com.gorisse.thomas.sceneform.Color
+import com.gorisse.thomas.sceneform.light.color
 import java.nio.Buffer
 import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import java.nio.channels.Channels
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
 
 class CustomViewer() :AsyncResponse{
@@ -54,8 +49,10 @@ class CustomViewer() :AsyncResponse{
         modelViewer = ModelViewer(mSurfaceView)
         mSurfaceView.setOnTouchListener(modelViewer)
        // modelViewer.makeItTransparent()
+      //modelViewer.view.blendMode = com.google.android.filament.View.BlendMode.OPAQUE
+      //modelViewer.scene.skybox = Skybox.Builder().build(modelViewer.engine)
 
-        modelViewer.scene.skybox =Skybox.Builder().color(0.035f, 0.035f, 0.035f, 1.0f).build(modelViewer.engine)
+      //  modelViewer.scene.skybox =Skybox.Builder().color(0.035f, 0.035f, 0.035f, 1.0f).build(modelViewer.engine)
         renderer = modelViewer.engine.createRenderer()
       // clear the swapchain with transparent pixels
   //    val options = renderer.clearOptions
@@ -66,18 +63,18 @@ class CustomViewer() :AsyncResponse{
       //Skybox.Builder().build(modelViewer.engine)
       //  modelViewer.scene.skybox?.setColor(1.0f, 1.0f, 1.0f, 1.0f) //White color
     }
-
 fun setModelViewerColor(color:Int){
- // val intColor= Color.parseColor(color);
-  val r: Float = (color shr 16 and 0xff) / 255.0f
-  val g: Float = (color shr 8 and 0xff) / 255.0f
-  val b: Float = (color and 0xff) / 255.0f
-  val a: Float = (color shr 24 and 0xff) / 255.0f
-
-  modelViewer.scene.skybox?.setColor(r, g, b, a) //White color
+  val r = (color shr 16 and 0xff) / 255.0f
+  val g = (color shr 8 and 0xff) / 255.0f
+  val b = (color and 0xff) / 255.0f
+  val a = (color shr 24 and 0xff) / 255.0f
+  modelViewer.view.blendMode = com.google.android.filament.View.BlendMode.OPAQUE
+  //modelViewer.scene.skybox?.setColor(r,g,b,a)
+  modelViewer.scene.skybox =Skybox.Builder().color(r,g,b,a).build(modelViewer.engine)
+  modelViewer.light.color= Color(color.toFloat())
+  //modelViewer.scene.skybox =Skybox.Builder().color(R.toFloat(), G.toFloat(), B.toFloat(), A.toFloat()).build(modelViewer.engine)
 
 }
-
     fun loadGlb( url: String) {
         asyncTask.execute(url).get();
     }
@@ -216,7 +213,7 @@ fun setModelViewerColor(color:Int){
           transformToUnitCube()
           loadingDelegate?.onFinish()
         }
-        startAnimation()
+       // startAnimation()
         //loadEnviroment("venetian_crossroads_2k");
         loadIndirectLight()
       }
