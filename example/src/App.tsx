@@ -1,14 +1,15 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { ModelViewerView } from 'react-native-model-viewer';
+import { ThreeDView } from 'react-native-3d-view';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ModelViewerView
+      <ThreeDView
         url="http://176.126.237.165/beem/ship_no_materials.glb"
         color="#78909C"
+        duration={20}
         loadingColor="#1B5E20"
         style={styles.box}
       />

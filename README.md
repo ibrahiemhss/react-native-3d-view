@@ -5,21 +5,42 @@ GLB and GLTF model viewer
 ## Installation
 
 ```sh
-npm install react-native-model-viewer
+npm react-native-3d-view
 ```
 
 ## Usage
+
 
 ```js
 import { ModelViewerView } from "react-native-model-viewer";
 
 // ...
-<ModelViewerView
-        url="https://res.cloudinary.com/demo/image/upload/DamagedHelmet3D.glb"
-        color="#AB47BC"
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <ThreeDView
+        url="http://176.126.237.165/beem/ship_no_materials.glb"
+        color="#78909C"
+        duration={20}
         loadingColor="#1B5E20"
         style={styles.box}
-      />```
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: '100%',
+    height: '50%',
+  },
+});
+```
 
 ## Contributing
 

@@ -4,11 +4,12 @@
   android:layout_width="match_parent"
   android:background="@android:color/white"
   android:layout_height="match_parent">
-  <SurfaceView
-    android:id="@+id/surface_view"
-    android:layout_width="match_parent"
+  <com.google.ar.sceneform.SceneView
+    android:background="@android:color/white"
+    android:id="@+id/sceneView"
     android:layout_height="match_parent"
-    android:visibility="invisible"/>
+    android:layout_width="match_parent"
+    />
   <ProgressBar
     android:id="@+id/progress_par"
     android:layout_width="wrap_content"
@@ -16,5 +17,5 @@
     android:layout_gravity="center"
     android:indeterminate="true"
     style="?android:attr/progressBarStyleLarge"
-    android:visibility="visible" />
+    android:visibility="invisible" />
 </FrameLayout>

@@ -6,12 +6,13 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
 
-class ModelViewerPackage : ReactPackage {
-  override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-    return emptyList()
+class RNViewPackage : ReactPackage {
+
+  override fun createNativeModules(p0: ReactApplicationContext): List<NativeModule> {
+    return ArrayList()
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-    return listOf(ModelViewerViewManager(reactContext))
+    return listOf(RNViewManager(reactContext))
   }
 }
